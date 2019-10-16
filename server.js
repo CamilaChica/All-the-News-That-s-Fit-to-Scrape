@@ -44,5 +44,12 @@ app.listen(port, function(){
 
 
 app.get("/", function(req, res){
-    articles.find({}, null)
+    articles.find({}, null, {sort: {created: -1}}, function(err, data){
+            if (data.length === 0){
+                res.render("placeholder", {message: "There is not article founded yet, click the buttom to choose any article"});
+            }
+            else {
+                res.render("index", {articles: data})
+            }
+    });
 });

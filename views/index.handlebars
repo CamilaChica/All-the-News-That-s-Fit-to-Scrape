@@ -1,0 +1,14 @@
+{{#each articles}}
+<a href="{{this.link}}" target="_blank">{{this.title}}</a>
+
+{{#if this.note}}
+<button type="button" class="addnote-button" value="{{this._id}}">Edit</button>
+{{/if}}
+
+{{#unless this.note}}
+<button type="button" class="addnote-button" value="{{this._id}}">Add A Note</button>
+{{/unless}}
+
+ <summary>{{this.summary}}</summary> 
+
+{{/each}}

@@ -5,7 +5,7 @@ var schemanote = new Schema({
     title: {
         type: String,
     },
-    message: {
+    body: {
         type: String,
     }
 });
