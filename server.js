@@ -80,7 +80,8 @@ app.post("/save/:id", function(req, res){
         }
         else {
             articles.findByIdAndUpdate(req.params.id, {$set: {saved: true, status: "Article is already saved"}}, {new: true}, function(err, data){
-                res.redirect("/saved");
-        }
+                res.redirect("/saved", {saved: data});
+        })
+    }
     })
 })
