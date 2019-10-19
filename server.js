@@ -53,3 +53,25 @@ app.get("/", function(req, res){
             }
     });
 });
+
+app.get("/:id", function(req, res){
+    articles.findById(req.params.id, function(err, data){
+        res.json(data);
+    })
+})
+
+app.get("/saved", function(req, res){
+    articles.find({saved: true}, null, {sort: {created: -1}}, function(err, data){
+            if(data.length === 0){
+                res.render("placeholder", {message: "You have not saved any articles"})
+            }else{
+                res.render("saved", {saved: data});
+            }
+    })
+})
+
+app.post("/save/:id", function(req, res){
+    articles.findById(req.params.id, function(err, data){
+        if(data.)
+    })
+})
