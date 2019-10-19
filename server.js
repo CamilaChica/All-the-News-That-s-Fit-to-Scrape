@@ -64,7 +64,8 @@ app.get("/saved", function(req, res){
     articles.find({saved: true}, null, {sort: {created: -1}}, function(err, data){
             if(data.length === 0){
                 res.render("placeholder", {message: "You have not saved any articles"})
-            }else{
+            }
+            else {
                 res.render("saved", {saved: data});
             }
     })
@@ -72,6 +73,14 @@ app.get("/saved", function(req, res){
 
 app.post("/save/:id", function(req, res){
     articles.findById(req.params.id, function(err, data){
-        if(data.)
+        if(data.saved){
+            articles.findByIdAndUpdate(req.params.id, {$set: {saved: false, status: "Save article"}}, {new: true}, function(err, data){
+                res.redirect("/");
+            })
+        }
+        else {
+            articles.findByIdAndUpdate(req.params.id, {$set: {saved: true, status: "Article is already saved"}}, {new: true}, function(err, data){
+                res.redirect("/saved");
+        }
     })
 })
