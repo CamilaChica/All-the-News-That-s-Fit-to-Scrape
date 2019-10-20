@@ -84,4 +84,15 @@ app.post("/save/:id", function(req, res){
         })
     }
     })
-})
+});
+app.post("/search", function(req, res){
+    //console.log(req.body.search);
+    articles.find({$text: {$search: req.body.search, $caseSensative: false}}, null, {sort: {created: -1}}, function(err, data){
+        if(data.length === 0){
+            res.render("placeholder", {message: "You have not saved any articles"})
+        }
+        else {
+            res.render("search", {saved: data});
+        }
+    });
+});
