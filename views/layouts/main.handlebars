@@ -20,7 +20,18 @@
     <title>All the News That´s Fit to Scrape</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <header>
+		<a href="/"><div id="sitename">NYT Scraper</div></a>
+		<a href="/"><button id="all-articles">All Articles</button></a>
+		<a href="/saved"><button id="saved-articles">Saved Articles</button></a>
+		<form action="/scrape" method="GET">
+			<button type="submit" id="refresh-articles">Scrape For Newest Articles</button>
+		</form>
+		<form action="/search" method="POST">
+			<button type="submit" id="search-submit">Submit</button>
+			<input type="text" name="search" placeholder="Search for articles" id="search-input">
+		</form>
+	</header>
     <!-- links for different website options -->
     
     <div id="container">
