@@ -14,3 +14,6 @@ function shownote(event) {
 	});
 
 }
+
+$(document).on("click", ".addnote-button", shownote);
+$(document).on("click", "#add-note", addnote);
