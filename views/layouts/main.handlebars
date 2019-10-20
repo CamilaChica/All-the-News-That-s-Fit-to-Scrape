@@ -39,6 +39,7 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- JScript -->
+    <script src="/assets/javascript/app.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script type="text/javascript" src="public/assets/javascript/app.js"></script>
 
@@ -47,5 +48,20 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <div id="addnote">
+		<div id="note-displayer">
+			<h2>Note</h2>
+			<h3>Article: <span id="article-title"></span></h3>
+			<div id="note">
+				<label for="note-title">Title</label><br>
+				<input type="text" placeholder="Title" name="title" id="note-title"><br>
+				<label for="note-body">Note</label><br>
+				<textarea rows="7" placeholder="Note" id="note-body"></textarea><br>
+				<button type="submit" id="add-note">Save Note</button>
+				<button type="button" id="close-note">Cancel</button>
+			</div>
+		</div>
+	</div>
   </body>
 </html>
