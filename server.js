@@ -96,3 +96,23 @@ app.post("/search", function(req, res){
         }
     });
 });
+
+app.get("/note/:id", function(req, res){
+    var id = req.params.id;
+    articles.findById(id).populate("note").exec(function(err, data){
+            res.send(data.notes);
+    });
+});
+
+app.post("/note/:id", function(req, res){
+    var tempNote = new notes(req.body);
+    notes.saved(function(err, doc){
+        if(err) throw err;
+        articles.findByIdAndUpdate(req.params.id, {$set: {"note": doc._id}}, {new: true}, function(err, res1){
+            if(err) throw err;
+            else{
+                res.send(res1);
+            }
+        });
+    });
+});
