@@ -6,8 +6,8 @@ var mongoose = require ("mongoose")
 var cheerio = require ("cheerio")
 var request = require ("request")
 
-var notes = require("./models/note.js")
-var articles = require("./models/article.js")
+var Note = require("./models/note.js")
+var Article = require("./models/article.js")
 var databaseUrl = 'mongodb://localhost/scrap';
 
 if (process.env.MONGODB_URI){
@@ -35,7 +35,7 @@ var port = process.env.port || 3030;
 app.use(express.static("public"));
 app.use(body.urlencoded({extended: false}));
 app.use(method("_method"));
-app.enable("handlebars", expressHandlebars({defaultLayout : "main"}));
+app.engine("handlebars", expressHandlebars({defaultLayout : "main"}));
 app.set("view engine", "handlebars");
 
 app.listen(port, function(){
@@ -55,13 +55,16 @@ app.get("/", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-	request("https://www.nytimes.com/section/world", function(error, response, html) {
+	request("https://news.ycombinator.com/", function(error, response, html) {
 		var $ = cheerio.load(html);
 		var result = {};
 		$("div.story-body").each(function(i, element) {
 			var link = $(element).find("a").attr("href");
-			var title = $(element).find("h2.headline").text().trim();
-			var summary = $(element).find("p.summary").text().trim();
+            var title = $(element).find("a").text().trim();
+            request("https://news.ycombinator.com/", function(error, response, html) {
+                var summary = $(element).find("p").text().trim();
+        });
+			
 			var img = $(element).parent().find("figure.media").find("img").attr("src");
 			result.link = link;
 			result.title = title;
@@ -72,7 +75,7 @@ app.get("/scrape", function(req, res) {
 				result.img = img;
 			}
 			else {
-				result.img = $(element).find(".wide-thumb").find("img").attr("src");
+				result.img = $(element).find("figure").find("img").attr("src");
 			};
 			var entry = new Article(result);
 			Article.find({title: result.title}, function(err, data) {
@@ -87,6 +90,10 @@ app.get("/scrape", function(req, res) {
 		res.redirect("/");
 	});
 });
+
+
+
+
 
 app.get("/saved", function(req, res) {
 	Article.find({issaved: true}, null, {sort: {created: -1}}, function(err, data) {
