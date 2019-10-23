@@ -55,19 +55,22 @@ app.get("/", function(req, res) {
 });
 
 app.get("/scrape", function(req, res) {
-	request("https://news.ycombinator.com/", function(error, response, html) {
+	request("https://www.skysports.com/football/news", function(error, response, html) {
 		var $ = cheerio.load(html);
+		//console.log(html);
 		var result = {};
-		$("div.story-body").each(function(i, element) {
-			var link = $(element).find("a").attr("href");
-            var title = $(element).find("a").text().trim();
-            request("https://news.ycombinator.com/", function(error, response, html) {
-                var summary = $(element).find("p").text().trim();
-        });
-			
-			var img = $(element).parent().find("figure.media").find("img").attr("src");
+		$(".news-list__item").each(function(i, element) {
+			var link = $(element).find("a.news-list__headline-link").attr("href");
+			//console.log(link);
+			var title = $(element).find("a.news-list__headline-link").text().trim();
+			//console.log(title);
+			var summary = $(element).find(".news-list__snippet").text().trim();
+			//console.log(summary);
+			var img = $(element).find("img.news-list__image").attr("data-src");
+			//console.log(img);
 			result.link = link;
 			result.title = title;
+			
 			if (summary) {
 				result.summary = summary;
 			};
@@ -75,8 +78,8 @@ app.get("/scrape", function(req, res) {
 				result.img = img;
 			}
 			else {
-				result.img = $(element).find("figure").find("img").attr("src");
-			};
+				result.img = $(element).find(".wide-thumb").find("img").attr("src");
+			}; 
 			var entry = new Article(result);
 			Article.find({title: result.title}, function(err, data) {
 				if (data.length === 0) {
