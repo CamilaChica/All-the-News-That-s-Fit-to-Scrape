@@ -30,7 +30,7 @@ database.on("open", function(open){
 });
 
 var app = express();
-var port = process.env.port || 3030;
+var port = process.env.port || 5000;
 
 app.use(express.static("public"));
 app.use(body.urlencoded({extended: false}));
