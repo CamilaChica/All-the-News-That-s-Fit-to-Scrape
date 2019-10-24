@@ -38,7 +38,7 @@ app.use(method("_method"));
 app.engine("handlebars", expressHandlebars({defaultLayout : "main"}));
 app.set("view engine", "handlebars");
 
-app.listen(port, function(){
+app.listen(PORT, function(){
         console.log("Yay we have connected to the server!");
 });
 
