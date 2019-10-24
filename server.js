@@ -8,7 +8,7 @@ var request = require ("request")
 
 var Note = require("./models/note.js")
 var Article = require("./models/article.js")
-var databaseUrl = 'mongodb://localhost/scrap';
+var databaseUrl = 'mongodb://root:camila123@ds339348.mlab.com:39348/heroku_89vljt3g';
 
 if (process.env.MONGODB_URI){
     mongoose.connect(process.env.MONGODB_URI)
