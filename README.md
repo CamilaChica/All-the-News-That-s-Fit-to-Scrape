@@ -157,7 +157,7 @@ Now that we have a backend to our applications, we use Heroku for hosting. Pleas
 
 Please see Heroku’s Account Verification Information for more details.
 
-
+![alt text](public/assets/images/IMAGE APP.jpg)
 
 
 

@@ -8,7 +8,8 @@ var request = require ("request")
 
 var Note = require("./models/note.js")
 var Article = require("./models/article.js")
-var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost/scrap';
+//var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost/scrap';
+var databaseUrl = 'mongodb://localhost/scrap';
 
 if (process.env.MONGODB_URI){
     mongoose.connect(process.env.MONGODB_URI)
@@ -30,7 +31,8 @@ database.on("open", function(open){
 });
 
 var app = express();
-var PORT = process.env.PORT || 5000;
+//var PORT = process.env.PORT || 5000;
+var PORT = 3030;
 
 app.use(express.static("public"));
 app.use(body.urlencoded({extended: false}));
